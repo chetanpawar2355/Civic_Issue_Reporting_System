@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: Helvetica, Arial, sans-serif !important;
+}
+
+.container {
+    flex: 1;
+}
+
+
+/* Card Styling */
+.listing-card2 {
+    border: none !important;
+    border-radius: 1.5rem !important;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect (card lift) */
+.listing-card2:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* Image Styling */
+.card-img-top2 {
+    height: 20rem;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Image Zoom on Hover */
+.listing-card2:hover .card-img-top2 {
+    transform: scale(1.04);
+}
+
+/* Overlay effect */
+.card-img-overlay2 {
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.listing-card2:hover .card-img-overlay2 {
+    opacity: 1;
+}
+
+/* Card Body */
+.card-body2 {
+    padding: 0.8rem 1rem !important;
+    background: lightgrey;
+    /* light grey background */
+    border-top: 1px solid #eee;
+}
+
+/* Badge Styling */
+.badge {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border-radius: 20px;
+}
+
+/* Remove link underline */
+.listing-link2 {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* show card */
+.show-img {
+    height: 40vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+    border: none !important;
+}
+
+.card-img-top3 {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+
+/* new Page */
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+    color: black !important;
+}
+
+
+/* font of createdAt Date */
+.createdDate {
+    font-size: 0.9rem;
+    color: black;
+}
