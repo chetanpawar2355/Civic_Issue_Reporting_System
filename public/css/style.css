@@ -10,10 +10,69 @@ body {
 }
 
 
+/* navbar */
+
+.navbar {
+    height: 4rem;
+    background: linear-gradient(to right, #1f2329, #2c3136);
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.fa-recycle {
+    font-size: 2rem;
+    color: rgb(0, 202, 0);
+}
+
+
+/* Footer */
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: black;
+    margin-right: 5px;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+    text-decoration-color: blue;
+}
+
+.f-info-socials i {
+    padding-top: 20px;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    background-color: rgb(240, 240, 245);
+    color: black;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: space-evenly;
+    justify-content: center;
+    height: 8rem;
+}
+
+.f-info-socials,
+.f-info-links,
+.f-info-brand {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+
 /* Card Styling */
 .listing-card2 {
     border: none !important;
-    border-radius: 1.5rem !important;
+    border-radius: 1rem !important;
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
@@ -59,12 +118,6 @@ body {
     border-top: 1px solid #eee;
 }
 
-/* Badge Styling */
-.badge {
-    font-size: 0.8rem;
-    padding: 6px 10px;
-    border-radius: 20px;
-}
 
 /* Remove link underline */
 .listing-link2 {
