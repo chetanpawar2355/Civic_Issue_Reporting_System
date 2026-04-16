@@ -2,6 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    margin: 0;
     font-family: Helvetica, Arial, sans-serif !important;
 }
 
@@ -28,8 +29,6 @@ body {
 
 
 /* Footer */
-
-/* Footer */
 .f-info-links a {
     text-decoration: none;
     color: black;
@@ -54,9 +53,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-    align-items: space-evenly;
     justify-content: center;
+    align-items: center;
     height: 8rem;
+    width: 100%;
 }
 
 .f-info-socials,
@@ -68,6 +68,10 @@ body {
     display: flex;
 }
 
+.borderAdd{
+    border-left: 5px solid darkblue !important;
+    border-right: 5px solid darkblue !important;
+}
 
 /* Card Styling */
 .listing-card2 {

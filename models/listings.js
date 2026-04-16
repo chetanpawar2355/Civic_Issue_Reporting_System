@@ -36,7 +36,21 @@ const listingSchema = new Schema({
             "resolved",
         ],
         default: "pending",
-    }
+    },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    assignedTo: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
 }, { timestamps: true });
 
 const Listing = mongoose.model("Listing", listingSchema);

@@ -33,10 +33,47 @@
                 </p>
             </div>
         </div>
-        <div class="btns">
-            <a class="add-btn btn offset-5" href="/listings/<%= listing._id %>/edit">Edit</a>
-            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                <button class="btn btn-dark offset-4">Delete</button>
+
+
+        <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
+            <div class="btns">
+                <a class="add-btn btn offset-5" href="/listings/<%= listing._id %>/edit">Edit</a>
+
+                <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+                    <button class="btn btn-dark offset-4">Delete</button>
+                </form>
+
+            </div>
+            <% } %>
+
+        <div class="col-6 offset-3">
+            <br>
+            <hr>
+            <form action="/listings/<%= listing._id%>/reviews" method="POST" class="needs-validation" novalidate>
+                <div class="mb-3 mt-3">
+                    <label for="comment" class="form-label">Comments</label>
+                    <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control"
+                        required></textarea>
+                    <div class="invalid-feedback">Please provide a comment.</div>
+                </div>
+                <button class="btn btn-outline-dark">Submit</button>
             </form>
+        </div>
+        <div class="col-6 offset-3 mb-3">
+            <br>
+            <hr>
+            <h5 class="fw-bold">Reviews</h5>
+            <% for(let review of listing.reviews) { %>
+                <div class="card mb-2  borderAdd">
+                    <div class="card-body">
+                        <p>
+                            @<%= review.author.username %>
+                        </p>
+                        <p>
+                            <%= review.comment %>
+                        </p>
+                    </div>
+                </div>
+                <% } %>
         </div>
     </div>

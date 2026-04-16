@@ -4,15 +4,22 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link" href="/listings">Explore</a>
             </div>
-
+        
             <div class="navbar-nav ms-auto me-5">
-                <a class="nav-link" href="/listings/new">Add New Listing</a>
+                <% if(!currentUser) { %>
+                    <a class="nav-link" href="/signup">Sign Up</a>
+                    <a class="nav-link" href="/login">Log In</a>
+                <% } %>
+                <% if(currentUser) { %>
+                    <a class="nav-link" href="/listings/new">Report Issue</a>
+                    <a class="nav-link" href="/logout">Log Out</a>
+                <% } %>
             </div>
+
+
         </div>
-    </div>
 </nav>
