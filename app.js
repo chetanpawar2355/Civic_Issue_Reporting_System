@@ -297,7 +297,7 @@ app.put("/dashboard/admin/:id/approve", isAdmin, wrapAsync(async (req, res) => {
 }));
 
 app.put("/dashboard/admin/:id/reject", isAdmin, wrapAsync(async (req, res) => {
-    await Listing.findByIdAndUpdate(req.params.id, { status: "in-progress" });
+    await Listing.findByIdAndUpdate(req.params.id, { status: "pending" });
     req.flash("success", "Sent back to employee");
     res.redirect("/dashboard/admin");
 }));
@@ -335,13 +335,11 @@ app.put("/dashboard/employee/:id", isEmployee, isLoggedIn, upload.single("resolv
 
     const listing = await Listing.findById(req.params.id);
 
-    // ❌ safety check (invalid flow)
     if (!listing) {
         req.flash("error", "Issue not found");
         return res.redirect("/dashboard/employee");
     }
 
-    // 🔒 allow only valid transitions
     if (listing.status === "assigned" && status !== "in-progress") {
         req.flash("error", "Invalid status change");
         return res.redirect("/dashboard/employee");
@@ -352,7 +350,6 @@ app.put("/dashboard/employee/:id", isEmployee, isLoggedIn, upload.single("resolv
         return res.redirect("/dashboard/employee");
     }
 
-    // 🔥 image required only for pending-review
     if (status === "pending-review" && !req.file) {
         req.flash("error", "Image is required before sending for review!");
         return res.redirect("/dashboard/employee");
@@ -360,7 +357,6 @@ app.put("/dashboard/employee/:id", isEmployee, isLoggedIn, upload.single("resolv
 
     let updateData = { status };
 
-    // save image if uploaded
     if (req.file) {
         updateData.resolvedImage = {
             url: req.file.path,
