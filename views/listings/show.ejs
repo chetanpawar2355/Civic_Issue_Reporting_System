@@ -41,15 +41,20 @@
                         <%= listing.state %>
                     </p>
 
-                    <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
-                        <div class="action-row">
-                            <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
+                    <% 
+    const isOwner = currentUser && listing.owner && listing.owner._id.equals(currentUser._id);
+    const isAdmin = currentUser && currentUser.role === "admin";
+%>
 
-                            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                                <button class="btn-delete">Delete</button>
-                            </form>
-                        </div>
-                        <% } %>
+<% if(isOwner || isAdmin) { %>
+    <div class="action-row">
+        <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
+
+        <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+            <button class="btn-delete">Delete</button>
+        </form>
+    </div>
+<% } %>
             </div>
 
         </div>

@@ -21,7 +21,7 @@ const { storage } = require("./cloudConfig");
 const upload = multer({ storage });
 const User = require("./models/users.js");
 const wrapAsync = require("./utils/wrapAsync.js");
-const { isLoggedIn, isOwner, saveRedirectUrl } = require("./middleware.js");
+const { isLoggedIn, isOwner, saveRedirectUrl, isOwnerOrAdmin } = require("./middleware.js");
 
 
 app.set("view engine", "ejs");
@@ -136,14 +136,14 @@ app.get("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 
-app.get("/listings/:id/edit", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
+app.get("/listings/:id/edit", isLoggedIn, isOwnerOrAdmin, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
     res.render("listings/edit.ejs", { listing });
 }));
 
 
-app.put("/listings/:id", isLoggedIn, isOwner, upload.single("listing[image]"), wrapAsync(async (req, res) => {
+app.put("/listings/:id", isLoggedIn, isOwnerOrAdmin, upload.single("listing[image]"), wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
     if (typeof req.file !== "undefined") {
