@@ -364,6 +364,7 @@
     object-fit: cover;
 }
 
+/* STATUS BADGES */
 .status-badge {
     position: absolute;
     top: 8px;
@@ -373,7 +374,6 @@
     border-radius: 20px;
     font-weight: 600;
 }
-
 
 .pending {
     background: #ffe0b2;
@@ -400,7 +400,7 @@
     color: #1b5e20;
 }
 
-
+/* CONTENT */
 .card-content {
     padding: 12px;
     display: flex;
@@ -414,8 +414,10 @@
     font-weight: 600;
     margin-bottom: 8px;
     color: #222;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
 
 .card-footer {
     display: flex;
@@ -427,7 +429,6 @@
     font-size: 12px;
     color: #777;
 }
-
 
 .view-btn {
     font-size: 12px;
@@ -441,47 +442,11 @@
 }
 
 .view-btn::after {
-    content: "→";
-    transition: 0.2s;
+    content: " →";
 }
 
-
-/* FEATURES */
-.features {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px;
-}
-
-.card {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-/* STEPS */
-.steps {
-    text-align: center;
-    padding: 40px;
-}
-
-.step-box {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-/* STATS */
-.stats {
-    display: flex;
-    justify-content: space-around;
-    padding: 40px;
-}
-
-/* CTA */
-.cta {
-    text-align: center;
-    padding: 40px;
+@media (max-width: 576px) {
+    .main-listing {
+        margin: 20px 12px;
+    }
 }
