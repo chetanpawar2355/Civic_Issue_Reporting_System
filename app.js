@@ -143,7 +143,7 @@ app.get("/listings/:id/edit", isLoggedIn, isOwnerOrAdmin, wrapAsync(async (req, 
 }));
 
 
-app.put("/listings/:id", isLoggedIn, isOwnerOrAdmin, upload.single("listing[image]"), wrapAsync(async (req, res) => {
+app.put("/listings/:id", isLoggedIn, isOwner, upload.single("listing[image]"), wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
     if (typeof req.file !== "undefined") {
@@ -157,7 +157,7 @@ app.put("/listings/:id", isLoggedIn, isOwnerOrAdmin, upload.single("listing[imag
 }));
 
 
-app.delete("/listings/:id", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
+app.delete("/listings/:id", isLoggedIn, isOwnerOrAdmin, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
     console.log(deletedListing);
