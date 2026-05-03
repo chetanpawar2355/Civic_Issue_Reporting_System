@@ -478,12 +478,14 @@ html {
 .brand-name a {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #ffffff;
+    color: white !important;
+    text-align: left;
     text-decoration: none;
 }
 
 .tagline {
     font-size: 0.7rem;
+    text-align: left;
     color: #9ca3af;
 }
 
