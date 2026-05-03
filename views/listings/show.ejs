@@ -1,79 +1,110 @@
 <% layout("/layouts/boilerplate") %>
-    <div class="row mt-3">
-        <div class="col-6 offset-3">
-            <br>
-            <h3 class="fw-bold">
-                <%= listing.title %>
-            </h3>
-            <br>
-        </div>
-        <div class="card listing-card col-6 offset-3 show-card">
-            <img src="<%= listing.image.url %>" class="card-img-top show-img card-img-top3" width="500px"
-                alt="listing_image">
+    <div class="main-title">
+        <h2 class="fw-bold title-strip">
+            <%= listing.title %>
+        </h2>
+    </div>
 
-            <div class="card-body">
-                <p class="card-text">
+    <div class="container show-container">
+        <h4 class="section-heading">Reported Issue Details</h4>
+
+        <div class="top-grid">
+
+            <div class="card-box image-box">
+                <img src="<%= listing.image.url %>" class="main-img">
+            </div>
+
+            <div class="card-box detail-box">
+                <h5 class="mb-2">
+                    <%= listing.title %>
+                </h5>
+                <hr>
+                <p class="desc">
                     <%= listing.description %>
                 </p>
-                <p>
-                    <% let statusClass="" ; if(listing.status==="pending" ) { statusClass="bg-warning text-dark" ; }
-                        else if(listing.status==="assigned" ) { statusClass="bg-primary" ; } else
-                        if(listing.status==="in-progress" ) { statusClass="bg-info text-dark" ; } else
-                        if(listing.status==="pending-review" ) { statusClass="bg-secondary" ; } else
-                        if(listing.status==="resolved" ) { statusClass="bg-success" ; } %>
-                        <span class="badge <%= statusClass %> text-capitalize">
+                <% let statusClass="" ; if(listing.status==="pending" ) { statusClass="badge-pending" ; } else
+                    if(listing.status==="assigned" ) { statusClass="badge-assigned" ; } else
+                    if(listing.status==="in-progress" ) { statusClass="badge-progress" ; } else
+                    if(listing.status==="pending-review" ) { statusClass="badge-review" ; } else
+                    if(listing.status==="resolved" ) { statusClass="badge-resolved" ; } %>
+
+                    <p>
+                        <strong>🛠️ Status: &nbsp;</strong>
+                        <span class="<%= statusClass %>">
                             <%= listing.status.replace("-", " " ) %>
                         </span>
-                </p>
-                <p class="card-text">
-                    <%= listing.location %>
-                </p>
-                <p class="card-text">
-                    <%= listing.state %>
-                </p>
+                    </p>
+                    <p><strong>📍 Location:</strong>
+                        <%= listing.location %>
+                    </p>
+                    <p><strong>🌍 State:</strong>
+                        <%= listing.state %>
+                    </p>
+
+                    <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
+                        <div class="action-row">
+                            <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
+
+                            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+                                <button class="btn-delete">Delete</button>
+                            </form>
+                        </div>
+                        <% } %>
             </div>
+
         </div>
+        <hr>
 
+        <h4 class="section-heading">Resolve Issue Details</h4>
 
-        <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
-            <div class="btns">
-                <a class="add-btn btn offset-5" href="/listings/<%= listing._id %>/edit">Edit</a>
-
-                <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                    <button class="btn btn-dark offset-4">Delete</button>
-                </form>
-
-            </div>
-            <% } %>
-
-        <div class="col-6 offset-3">
-            <br>
-            <hr>
-            <form action="/listings/<%= listing._id%>/reviews" method="POST" class="needs-validation" novalidate>
-                <div class="mb-3 mt-3">
-                    <label for="comment" class="form-label">Comments</label>
-                    <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control"
-                        required></textarea>
-                    <div class="invalid-feedback">Please provide a comment.</div>
-                </div>
-                <button class="btn btn-outline-dark">Submit</button>
-            </form>
-        </div>
-        <div class="col-6 offset-3 mb-3">
-            <br>
-            <hr>
-            <h5 class="fw-bold">Reviews</h5>
-            <% for(let review of listing.reviews) { %>
-                <div class="card mb-2  borderAdd">
-                    <div class="card-body">
-                        <p>
-                            @<%= review.author.username %>
+        <div class="top-grid">
+            <div class="card-box image-box">
+                <% if(listing.status==="resolved" && listing.resolvedImage?.url) { %>
+                    <img src="<%= listing.resolvedImage.url %>" class="main-img">
+                    <% } else { %>
+                        <p class="muted image-alignment"><i class="fa fa-image me-2"></i>
+                            Image will be shown here after the issue is resolved.
                         </p>
-                        <p>
-                            <%= review.comment %>
+                        <% } %>
+            </div>
+
+            <div class="card-box status-info-box">
+                <h5 class="section-title">Status Info</h5>
+                <hr>
+                <% if(listing.status==="resolved" && listing.resolutionDetails) { %>
+
+                    <p><strong>📝 Message:</strong>
+                        <%= listing.resolutionDetails.message %>
+                    </p>
+                    <p><strong>⏱️ Date:</strong>
+                        <%= listing.resolutionDetails.resolvedAt.toDateString() %>
+                    </p>
+
+                    <% } else { %>
+                        <p class="muted">Details will appear after resolution.</p>
+                        <% } %>
+            </div>
+        </div><hr>
+
+        <h4 class="section-heading">Comments</h4>  
+
+
+        <div class="card-box comment-box">
+            <form action="/listings/<%= listing._id%>/reviews" method="POST" class="comment-input-bar">
+                <input type="text" name="review[comment]" placeholder="Write a comment..." required>
+                <button class="btn-send">Post</button>
+            </form>
+
+            <div class="review-list">
+                <% listing.reviews.forEach(r=> { %>
+                    <div class="review-item">
+                        <span class="review-user">@<%= r.author.username %></span>
+                        <p class="review-text">
+                            <%= r.comment %>
                         </p>
                     </div>
-                </div>
-                <% } %>
+                    <% }) %>
+            </div>
         </div>
+
     </div>

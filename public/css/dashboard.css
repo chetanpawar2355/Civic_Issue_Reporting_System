@@ -1,0 +1,574 @@
+/* Admin Dashboard */
+
+/* ===== DASHBOARD CARDS ===== */
+.dashboard-card {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+
+.dashboard-card h5 {
+  font-weight: 600;
+  color: #555;
+}
+
+.dashboard-card p {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+  color: #fb8500;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.table-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.table th {
+  font-weight: 600;
+  color: #444;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f3f5;
+  transition: 0.2s;
+}
+
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.status.pending {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+.status.assigned {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status.in-progress {
+  background-color: #bbdefb;
+  color: #0d47a1;
+}
+
+.status.pending-review {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status.resolved {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.btn-warning {
+  background-color: #fb8500;
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background-color: #ff9e00;
+}
+
+.btn-outline-primary {
+  border-color: #3a86ff;
+  color: #3a86ff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3a86ff;
+  color: white;
+}
+
+.btn-sm {
+  border-radius: 10px !important;
+}
+
+td .btn-sm {
+  border: none;
+}
+
+
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(251, 133, 0, 0.2);
+  border-color: #fb8500;
+}
+
+form.d-flex {
+  gap: 10px !important;
+}
+
+
+.assigned-user {
+  position: relative;
+}
+
+.info-icon {
+  font-size: 14px;
+  color: #6c757d;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.info-icon:hover {
+  color: #3a86ff;
+}
+
+.user-card {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 200px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 10;
+}
+
+.info-icon:hover~.user-card {
+  opacity: 1;
+  visibility: visible;
+}
+
+.user-card h5 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.user-card p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #555;
+}
+
+
+.action-buttons a {
+  padding: 10px 22px;
+  margin: 5px 0;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.action-buttons .btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(251, 133, 0, 0.4);
+}
+
+.action-buttons .btn-outline-primary:hover {
+  transform: translateY(-2px);
+}
+
+
+.fa-arrow-up-right-from-square:hover {
+  color: white !important;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .dashboard-card p {
+    font-size: 22px;
+  }
+}
+
+
+/* ----------------------------------------------------------------------- */
+
+/* Add New Employee */
+
+/* All CSS is already return in listings.css */
+
+
+/* ----------------------------------------------------------------------- */
+
+/* All Employees Page */
+
+.container {
+  margin-top: 30px;
+}
+
+h2 {
+  color: #111827;
+}
+
+.btn-warning {
+  background: #fb8500;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 6px 14px;
+}
+
+.btn-warning:hover {
+  background: #ff9e00;
+}
+
+/* ===== CARD ===== */
+.employee-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  transition: 0.25s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.employee-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+}
+
+.employee-card h5 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.employee-card p {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.employee-card strong {
+  color: #111827;
+}
+
+.employee-card form {
+  margin-top: 12px;
+}
+
+.employee-card .btn-danger {
+  width: 100%;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 6px;
+  transition: 0.2s;
+}
+
+.employee-card .btn-danger:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.col-md-3 {
+  display: flex;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .employee-card {
+    padding: 14px;
+  }
+}
+
+
+/* ----------------------------------------------------------------------- */
+
+/* Client Dashboard */
+
+/* All CSS is already return in listings.css */
+
+
+
+/* ----------------------------------------------------------------------- */
+
+/* Employee Dashboard */
+
+.container {
+  margin: 40px auto;
+  max-width: 1100px;
+}
+
+
+.section-heading {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #111827;
+  border-left: 5px solid #fb8500;
+  padding-left: 12px;
+  letter-spacing: 0.3px;
+}
+
+.issue-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.issue-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+.issue-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+}
+
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-row h4 {
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+
+.issue-card p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+
+.status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f3f4f6;
+  text-transform: capitalize;
+}
+
+
+.issue-card form {
+  margin-top: auto;
+}
+
+
+.form-select {
+  border-radius: 10px;
+  font-size: 13px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  border-color: #fb8500;
+  box-shadow: 0 0 0 2px rgba(251, 133, 0, 0.2);
+}
+
+
+.form-control {
+  border-radius: 10px;
+  font-size: 13px;
+  padding: 6px;
+}
+
+.form-control:focus {
+  border-color: #fb8500;
+  box-shadow: 0 0 0 2px rgba(251, 133, 0, 0.2);
+}
+
+
+.submit-btn {
+  background: linear-gradient(135deg, #fbbf24, #fb8500);
+  border: none;
+  color: #111;
+  font-weight: 600;
+  padding: 9px;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(251, 133, 0, 0.3);
+}
+
+
+.text-warning {
+  color: #f59e0b !important;
+  font-weight: 500;
+}
+
+.text-success {
+  color: #16a34a !important;
+  font-weight: 500;
+}
+
+
+.issue-card hr {
+  margin: 10px 0;
+  opacity: 0.15;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+  }
+
+  .issue-card {
+    padding: 16px;
+  }
+
+  .title-row h4 {
+    font-size: 15px;
+  }
+}
+
+
+
+/* ----------------------------------------------------------------------- */
+
+/* ReviewEmployee Page by Admin */
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.review-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+  transition: 0.3s ease;
+}
+
+.review-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.review-card h4 {
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.review-card p {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+.review-card h5 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  border-left: 4px solid #fb8500;
+  padding-left: 10px;
+}
+
+
+.employee-info {
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #eee;
+  font-size: 13px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.employee-info strong {
+  color: #111;
+}
+
+.review-img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.no-image {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.review-card hr {
+  margin: 12px 0;
+  opacity: 0.15;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .review-card {
+    padding: 18px;
+  }
+}

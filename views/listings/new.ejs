@@ -1,42 +1,41 @@
 <% layout("/layouts/boilerplate") %>
-    <div class="row">
-        <div class="col-8 offset-2">
-            <br>
-            <h2 style="text-align: center;" class="fw-bold">Create New Listing</h2>
-            <br>
-            <form action="/listings" novalidate method="post" class="needs-validation" enctype="multipart/form-data">
 
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input name="listing[title]" placeholder="Add a Title" required type="text" class="form-control">
-                    <div class="invalid-feedback">Please enter a title</div>
-                    <div class="valid-feedback">Title looks good!</div>
-                </div>
+    <div class="form-page">
 
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" placeholder="Enter the Description" required id="description"
-                        class="form-control"></textarea>
-                    <div class="invalid-feedback">Please enter a short description</div>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload Image</label>
-                    <input name="listing[image]" type="file" class="form-control" required>
-                </div>
+    <div class="form-container">
 
-                <div class="mb-3">
-                    <label for="location" class="form-label">Location</label>
-                    <input type="text" id="location" name="listing[location]" class="form-control" required>
-                    <div class="invalid-feedback">Location should be valid</div>
-                </div>
+        <div class="form-box">
+            <h2 class="fw-bold">Spot an Issue? <span class="text-warning">Let Us Know</span></h2>
+            <p class="sub-text">Report a civic issue quickly and easily.</p>
 
-                <div class="mb-3">
-                    <label for="state" class="form-label">State</label>
-                    <input type="text" id="state" name="listing[state]" class="form-control" required>
-                    <div class="invalid-feedback">State should be valid</div>
-                </div>
+            <form action="/listings" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
 
-                <button class="btn btn-dark add-btn">Add</button>
+                <label class="form-label">Title</label>
+                <input name="listing[title]" id="title" placeholder="Add a title" required type="text" class="form-control">
+                <div class="invalid-feedback">Enter title</div>
+
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]" id="description" placeholder="Enter description" required
+                    class="form-control"></textarea>
+                <div class="invalid-feedback">Enter description</div>
+
+                <label class="form-label">Upload Image</label>
+                <input name="listing[image]" id="image" type="file" class="form-control" required>
+                <div class="invalid-feedback">Upload an image</div>
+
+                <label class="form-label">Location</label>
+                <input type="text" name="listing[location]" id="location" class="form-control" required>
+                <div class="invalid-feedback">Enter location</div>
+
+                <label class="form-label">State</label>
+                <input type="text" name="listing[state]" id="state" class="form-control" required>
+                <div class="invalid-feedback">Enter state</div>
+
+                <button class="submit-btn">Report Issue</button>
+
             </form>
+
         </div>
+
     </div>
+</div>

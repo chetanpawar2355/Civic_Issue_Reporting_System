@@ -1,41 +1,55 @@
 <% layout("/layouts/boilerplate") %>
 
-    <div class="row">
-        <div class="col-8 offset-2">
-            <br>
-            <h2 style="text-align: center;">Edit Listing</h2>
-            <br>
-            <form action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input name="listing[title]" required class="form-control" value="<%= listing.title %>" type="text">
-                    <div class="invalid-feedback">Please enter a title</div>
-                    <div class="valid-feedback">Title looks good!</div>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" required class="form-control"
-                        id="description"><%= listing.description %></textarea>
-                    <div class="invalid-feedback">Please enter a short description</div>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Upload New Image</label>
-                    <input name="listing[image]" class="form-control" type="file">
-                </div>
-                <div class="mb-3">
-                    <label for="location" class="form-label">Location</label>
-                    <input name="listing[location]" required class="form-control" value="<%= listing.location %>"
-                        type="text">
-                    <div class="invalid-feedback">Location name should be valid</div>
-                </div>
-                <div class="mb-3">
-                    <label for="state" class="form-label">State</label>
-                    <input name="listing[state]" required class="form-control" value="<%= listing.state %>" type="text">
-                    <div class="invalid-feedback">State name should be valid</div>
-                </div>
-                <br>
-                <button class="btn add-btn">Update</button>
-                <br><br>
+    <div class="form-page">
+
+    <div class="form-container">
+
+        <div class="form-box">
+
+            <h2 class="fw-bold">Update your <span class="text-warning">Issue</span></h2>
+            <p class="sub-text">Update the details of your reported issue.</p>
+
+            <form action="/listings/<%= listing._id %>?_method=PUT"
+                  method="post"
+                  class="needs-validation"
+                  novalidate
+                  enctype="multipart/form-data">
+
+                <label class="form-label">Title</label>
+                <input name="listing[title]" id="title" required type="text"
+                    class="form-control"
+                    value="<%= listing.title %>">
+
+                <div class="invalid-feedback">Enter title</div>
+
+                <label class="form-label">Description</label>
+                <textarea name="listing[description]" id="description" required
+                    class="form-control"><%= listing.description %></textarea>
+
+                <div class="invalid-feedback">Enter description</div>
+
+                <label class="form-label">Upload New Image</label>
+                <input name="listing[image]" id="image" type="file" class="form-control">
+
+                <label class="form-label">Location</label>
+                <input name="listing[location]" id="location" required type="text"
+                    class="form-control"
+                    value="<%= listing.location %>">
+
+                <div class="invalid-feedback">Enter location</div>
+
+                <label class="form-label">State</label>
+                <input name="listing[state]" id="state" required type="text"
+                    class="form-control"
+                    value="<%= listing.state %>">
+
+                <div class="invalid-feedback">Enter state</div>
+
+                <button class="submit-btn">Update Issue</button>
+
             </form>
+
         </div>
+
     </div>
+</div>

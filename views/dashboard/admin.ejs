@@ -1,0 +1,188 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="main-title">
+        <h2 class="fw-bold title-strip">
+            Admin Dashboard
+        </h2>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row g-3 mb-4">
+            <div class="col-md-2">
+                <div class="dashboard-card">
+                    <h5>Total Issues</h5>
+                    <p>
+                        <%= issues.length %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dashboard-card">
+                    <h5>Pending</h5>
+                    <p>
+                        <%= issues.filter(i=> i.status === "pending").length %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dashboard-card">
+                    <h5>Assigned</h5>
+                    <p>
+                        <%= issues.filter(i=> i.status === "assigned").length %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dashboard-card">
+                    <h5>In-Progress</h5>
+                    <p>
+                        <%= issues.filter(i=> i.status === "in-progress").length %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dashboard-card">
+                    <h5>Pending Review</h5>
+                    <p>
+                        <%= issues.filter(i=> i.status === "pending-review").length %>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="dashboard-card">
+                    <h5>Resolved</h5>
+                    <p>
+                        <%= issues.filter(i=> i.status === "resolved").length %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- buttons of Add Employee and View Employees -->
+        <div class="d-flex justify-content-center gap-3 mb-4 action-buttons">
+            <a href="/dashboard/admin/newEmployee" class="btn btn-warning">
+                + Add Employee
+            </a>
+            <a href="/dashboard/admin/employees" class="btn btn-outline-primary">
+                Manage Employees
+            </a>
+        </div>
+
+
+        <div class="table-card p-3 mb-5">
+
+            <h5 class="fw-bold mb-3">📋 Issue Management</h5>
+
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Details</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% issues.forEach(issue=> { %>
+                        <tr>
+                            <td>
+                                <%= issue.title %>
+                            </td>
+                            <td>
+                                <a href="/listings/<%= issue._id %>" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"
+                                        style="color: rgb(46, 0, 171);"></i>
+                                </a>
+                            </td>
+
+                            <td>
+                                <span class="status <%= issue.status %>">
+                                    <%= issue.status %>
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="assigned-user d-flex align-items-center gap-1">
+
+                                    <% if(issue.assignedTo) { %>
+
+                                        <!-- ICON -->
+                                        <i class="fa-solid fa-circle-info info-icon"></i>
+
+                                        <!-- USERNAME -->
+                                        <span>@<%= issue.assignedTo.username %></span>
+
+                                        <!-- HOVER CARD -->
+                                        <div class="user-card">
+                                            <h5>
+                                                <%= issue.assignedTo.firstName %>
+                                                    <%= issue.assignedTo.lastName %>
+                                            </h5>
+                                            <p><b>Username:</b> @<%= issue.assignedTo.username %>
+                                            </p>
+                                            <p><b>ID:</b>
+                                                <%= issue.assignedTo.employeeId %>
+                                            </p>
+                                            <p><b>Email:</b>
+                                                <%= issue.assignedTo.email %>
+                                            </p>
+                                            <p><b>Phone:</b>
+                                                <%= issue.assignedTo.phone %>
+                                            </p>
+                                        </div>
+
+                                        <% } else { %>
+
+                                            <span class="text-muted">Not Assigned</span>
+
+                                            <% } %>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <!-- Assign -->
+                                <form action="/dashboard/admin/<%= issue._id %>/assign?_method=PUT" method="POST"
+                                    class="d-flex gap-2">
+                                    <select name="employeeId" class="form-select form-select-sm" required>
+                                        <option value="" disabled selected>Select Employee</option>
+                                        <% employees.forEach(emp=> { %>
+                                            <option value="<%= emp._id %>">
+                                                <%= emp.username %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                    <button class="btn btn-sm btn-warning">Assign</button>
+                                </form>
+
+                                <!-- NEW BUTTON / Approve / Reject -->
+                                <% if(issue.status==="pending-review" ) { %>
+                                    <div class="mt-2 d-flex gap-2">
+                                        <a href="/dashboard/admin/<%= issue._id %>/review" class="btn btn-info btn-sm">
+                                            View Work
+                                        </a>
+                                        <form action="/dashboard/admin/<%= issue._id %>/approve?_method=PUT"
+                                            method="POST">
+                                            <button class="btn btn-success btn-sm">Approve</button>
+                                        </form>
+                                        <form action="/dashboard/admin/<%= issue._id %>/reject?_method=PUT"
+                                            method="POST">
+                                            <button class="btn btn-danger btn-sm">Reject</button>
+                                        </form>
+                                    </div>
+                                    <% } %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>

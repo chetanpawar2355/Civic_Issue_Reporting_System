@@ -1,25 +1,60 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("/layouts/boilerplateWithoutFooter") %>
 
-    <div class="row mt-3">
-        <div class="col-6 offset-3">
-            <br>
-            <h1 class="fw-bold">Login</h1>
-            <br>
-        </div>
-        <div class="col-6 offset-3">
-            <form action="/login" method="post" class="needs-validation" novalidate>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input name="username" id="username" placeholder="Enter your username" required type="text"
-                        class="form-control">
+    <div class="login-page">
+        <div class="login-page">
+            <!-- ❌ CLOSE BUTTON -->
+            <a href="/" class="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </a>
+            <div class="login-container">
+
+                <!-- LEFT SIDE -->
+                <div class="login-left">
+
+                    <div class="left-content">
+                        <h1>Report Issues<br>Improve Your <span class="text-warning">City!</span></h1>
+                        <p>
+                            "Be part of a smarter community - report issues and help create safer,
+                            better streets."
+                        </p>
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input name="password" id="password" placeholder="Enter your password" required type="password"
-                        class="form-control">
-                </div><br>
-                <button class="btn btn-success">Login</button><br><br>
-            </form>
+                <!-- RIGHT SIDE -->
+                <div class="login-right">
+                    <div class="login-box">
+                        <h2>Sign in to your account</h2>
+                        <p class="sub-text"><span class="darkBlueColor">Welcome back!</span> Please enter your details.
+                        </p>
+
+                        <form action="/login" method="post" class="needs-validation" novalidate>
+                            <label for="username" class="form-label">Username</label>
+                            <input id="username" class="form-control" type="text" name="username" placeholder="Username"
+                                required>
+                            <div class="invalid-feedback">Please enter username</div>
+
+                            <label for="password" class="form-label">Password</label>
+                            <input id="password" class="form-control" type="password" name="password"
+                                placeholder="Password" required>
+                            <div class="invalid-feedback">Please enter password</div>
+
+                            <div class="forgot-box">
+                                <a href="/login">Forgot password?</a>
+                            </div>
+
+                            <button type="submit">Sign in</button>
+
+                            <p class="signup-text">
+                                Don't have an account?
+                                <a href="/signup">Sign up</a>
+                            </p>
+                        </form>
+                        <p>By joining, you agree to the SheherSetu <a href="/terms">Terms of Service</a>. Please read
+                            our
+                            <a href="/privacy">Privacy Policy</a> to learn how we use your personal data.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>

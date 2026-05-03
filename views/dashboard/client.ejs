@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="main-title">
+        <h2 class="fw-bold title-strip">
+            My Complaints
+        </h2>
+    </div>
+
+    <div class="main-listing">
+        <div class="container mt-4">
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+                <% issues.forEach(issue=> { %>
+
+                    <div class="col">
+                        <div class="listing-card">
+
+                            <!-- IMAGE -->
+                            <div class="img-wrapper">
+                                <img src="<%= issue.image?.url || '/images/default.jpg' %>" alt="Issue Image">
+
+                                <span class="status-badge <%= issue.status %>">
+                                    <%= issue.status.replace("-", " " ) %>
+                                </span>
+                            </div>
+
+                            <!-- CONTENT -->
+                            <div class="card-content">
+
+                                <h6 class="title">
+                                    <%= issue.title %>
+                                </h6>
+
+                                <div class="card-footer">
+                                    <span class="date">
+                                        <%= issue.createdAt.toLocaleDateString() %>
+                                    </span>
+
+                                    <a href="/listings/<%= issue._id %>" class="view-btn">
+                                        View
+                                    </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <% }) %>
+            </div>
+
+        </div>
+    </div>

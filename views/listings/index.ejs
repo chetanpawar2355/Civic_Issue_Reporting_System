@@ -1,34 +1,309 @@
-<% layout("/layouts/boilerplate") %>
-    <br><br>
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
-        <% for(let listing of allListings){ %>
-            <a href="/listings/<%= listing._id %>" class="listing-link listing-link2">
-                <div class="card listing-card listing-card2">
-                    <img src="<%= listing.image.url %>" class="card-img-top card-img-top2" alt="Listing_image"
-                        style="height: 17.5rem">
-                    <div class="card-img-overlay card-img-overlay2"></div>
+<% layout("/layouts/boilerplateLandingPage") %>
 
-                    <div class="card-body card-body2 px-3">
-                        <div class="fw-bold mb-2">
-                            <%= listing.title %>
+    <section id="home" class="hero-section">
+
+        <picture>
+            <!-- Mobile Image -->
+            <source media="(max-width: 768px)" srcset="/image/landingImageMobile.png">
+
+            <!-- Default Desktop Image -->
+            <img src="/image/landingImageDesktop.png" class="hero-bg" alt="hero">
+        </picture>
+
+        <nav class="navbar navbar-expand-md px-4">
+            <div class="container-fluid">
+                <div class="nav-left d-flex align-items-center">
+
+                    <div class="logo-icon">
+                        <a href="/#home"><i class="fa-solid fa-location-dot"></i></a>
+                    </div>
+
+                    <div class="logo-text ms-2">
+                        <div class="brand-name">
+                            <a href="/#home">Sheher<span>Setu</span></a>
                         </div>
+                        <div class="tagline">
+                            Report. Track. Resolve.
+                        </div>
+                    </div>
 
-                        <% let statusClass="" ; if(listing.status==="pending" ) { statusClass="bg-warning text-dark" ; }
-                            else if(listing.status==="assigned" ) { statusClass="bg-primary" ; } else
-                            if(listing.status==="in-progress" ) { statusClass="bg-info text-dark" ; } else
-                            if(listing.status==="pending-review" ) { statusClass="bg-secondary" ; } else
-                            if(listing.status==="resolved" ) { statusClass="bg-success" ; } %>
+                </div>
 
-                            <div class="d-flex justify-content-between align-items-center w-100">
-                                <span class="badge <%= statusClass %> text-capitalize">
-                                    <%= listing.status.replace("-", " " ) %>
-                                </span>
-                                <p class="createdDate m-0">
-                                    <%= listing.createdAt.toLocaleDateString() %>
-                                </p>
-                            </div>
+                <div class="ms-auto d-flex align-items-center gap-3">
+
+                    <% if(!currentUser) { %>
+                        <a class="btn-signin" href="/login">Sign in</a>
+                        <% } %>
+
+                            <% if(currentUser) { %>
+                                <div class="position-relative">
+
+                                    <!-- Avatar -->
+                                    <div class="profile-icon" id="profileIcon">
+                                        <div class="avatar1">
+                                            <%= ( currentUser.firstName && currentUser.lastName ?
+                                                (currentUser.firstName.charAt(0) + currentUser.lastName.charAt(0)) :
+                                                currentUser.username.charAt(0) ).toUpperCase() %>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dropdown -->
+                                    <div id="profileMenu" class="profile-menu d-none">
+
+                                        <div
+                                            class="dropdown-user-info d-flex align-items-center gap-3 px-3 py-2 border-bottom">
+                                            <div class="avatar2">
+                                                <%= ( currentUser.firstName && currentUser.lastName ?
+                                                    (currentUser.firstName.charAt(0) + currentUser.lastName.charAt(0)) :
+                                                    currentUser.username.charAt(0) ).toUpperCase() %>
+                                            </div>
+
+                                            <div>
+                                                <div class="fw-semibold small">
+                                                    <%= ( currentUser.firstName && currentUser.lastName ?
+                                                        (currentUser.firstName + " " + currentUser.lastName) :
+                                                        currentUser.username ) %>
+                                                </div>
+                                                <div class="text-muted small" title="<%= currentUser.email %>">
+                                                    <%= currentUser.email %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <a href="/">Home</a>
+                                        <a href="/profile">Profile</a>
+
+                                        <% if(currentUser.role !=="client" ) { %>
+                                            <a href="/dashboard">Dashboard</a>
+                                            <% } %>
+
+                                                <a href="/listings/new">Report Issue</a>
+                                                <a href="/listings">Track Complaints</a>
+                                                <a href="/logout" class="text-danger">Log Out</a>
+                                    </div>
+                                </div>
+                                <% } %>
+
+                </div>
+            </div>
+        </nav>
+
+    </section>
+
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="features-section container mt-5">
+        <h2 class="text-center mb-4">Why Choose Sheher<span class="text-warning">Setu?</span></h2>
+
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="fa fa-location-dot"></i>
+                    <h5>Easy Reporting</h5>
+                    <p>Report issues quickly with location and images.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="fa fa-chart-line"></i>
+                    <h5>Track Complaints</h5>
+                    <p>Monitor complaint status in real-time.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="fa fa-building"></i>
+                    <h5>Authority Response</h5>
+                    <p>Get updates directly from authorities.</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <i class="fa fa-bell"></i>
+                    <h5>Resolution Updates</h5>
+                    <p>Get clear updates once your issue is reviewed and resolved.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS SECTION -->
+    <section id="steps" class="steps-section text-center mt-5">
+        <h2 class="mb-4">How It Works</h2>
+
+        <div class="steps-container">
+
+            <div class="step">
+                <div class="icon">📝</div>
+                <p>Report the Issue</p>
+            </div>
+
+            <div class="step">
+                <div class="icon">📍</div>
+                <p>Add Location & Details</p>
+            </div>
+
+            <div class="step">
+                <div class="icon">🔍</div>
+                <p>Track Complaint</p>
+            </div>
+
+            <div class="step">
+                <div class="icon">✅</div>
+                <p>Get Resolution Update</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- OUR IMPACT SECTION -->
+    <section id="stats" class="stats-section text-center mt-5">
+        <h2 class="mb-4">Our Impact</h2>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="icon yellow">
+                    <i class="bi bi-file-earmark-text"></i>
+                </div>
+                <h3>500+</h3>
+                <p>Issues Reported</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon green">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <h3>320+</h3>
+                <p>Issues Resolved</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="icon purple">
+                    <i class="bi bi-people"></i>
+                </div>
+                <h3>150+</h3>
+                <p>Active Users</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA SECTION -->
+    <section class="cta-banner mt-5">
+        <div class="cta-content">
+            <a href="/listings/new" class="cta-btn">
+                Report Issue Now →
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+    <div class="container footer-container">
+
+        <!-- Left Section -->
+        <div class="footer-col">
+
+            <!-- Logo Section -->
+            <div class="nav-left d-flex align-items-center footer-logo">
+
+                <div class="logo-icon">
+                    <a href="/#home">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </a>
+                </div>
+
+                <div class="logo-text ms-2">
+                    <div class="brand-name">
+                        <a href="/#home">Sheher<span>Setu</span></a>
+                    </div>
+                    <div class="tagline">
+                        Report. Track. Resolve.
                     </div>
                 </div>
-            </a>
-            <% } %>
+
+            </div>
+
+            <!-- Description -->
+            <p class="footer-text mt-3">
+                Enabling citizens to report civic issues<br>
+                and track their resolution in real time.
+            </p>
+
+        </div>
+
+        <!-- Middle Section -->
+        <div class="footer-col">
+            <ul class="links">
+                <li><b class="sub-heading">Quick Links</b></li>
+                <li><a href="/#home">Home</a></li>
+                <li><a href="/#features">Features</a></li>
+                <li><a href="/#steps">How It Works</a></li>
+                <li><a href="/#stats">Our Impact</a></li>
+            </ul>
+        </div>
+
+        <!-- Middle Section -->
+        <div class="footer-col">
+            <ul class="links">
+                <li><b class="sub-heading">Legal</b></li>
+                <li><a href="/terms">Terms & Conditions</a></li>
+                <li><a href="/cookie">Cookie Policy</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+        <!-- Right Section -->
+        <div class="footer-col">
+            <ul class="links">
+                <li><b class="sub-heading">Contact Us</b></li>
+                <li>
+                    Email:
+                    <a href="mailto:support@shehersetu.com" class="contact-link">
+                        support@shehersetu.com
+                    </a>
+                </li>
+
+                <li>
+                    Phone:
+                    <a href="tel:+15551234567" class="contact-link">
+                        (555) 123-4567
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <ul class="links">
+                <li><b class="sub-heading">Social Links</b></li>
+
+                <li>
+                    <a href="https://facebook.com" target="_blank">
+                        <i class="fa-brands fa-facebook"></i> Facebook
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://instagram.com" target="_blank">
+                        <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://twitter.com" target="_blank">
+                        <i class="fa-brands fa-x-twitter"></i> Twitter
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div><hr>
+
+    <!-- Bottom -->
+    <div class="footer-bottom">
+        © 2026 SheherSetu. All rights reserved.
     </div>
+</footer>

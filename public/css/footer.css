@@ -1,0 +1,114 @@
+.footer {
+    background-color: #111827;
+    color: #d1d5db;
+    padding: 0px 20px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.brand-name2 a {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.yellow-span {
+    color: #FFC107;
+}
+
+.tagline {
+    font-size: 0.7rem;
+    color: #9ca3af;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col li {
+    margin-bottom: 8px;
+}
+
+.footer-col a {
+    color: #d1d5db;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+}
+
+.footer-col .links a:hover {
+    color: #FFC107;
+}
+
+.sub-heading {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+/* ===== BOTTOM ===== */
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 992px) {
+    .footer-col {
+        flex: 1 1 45%;
+    }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-logo {
+        justify-content: center;
+    }
+}
+
+/* ===== SMALL MOBILE ===== */
+@media (max-width: 480px) {
+    .footer-text {
+        font-size: 13px;
+    }
+
+    .footer-bottom {
+        font-size: 12px;
+    }
+}

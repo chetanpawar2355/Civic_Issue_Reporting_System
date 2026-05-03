@@ -1,4 +1,4 @@
-if(process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV != "production") {
     require("dotenv").config();
 }
 
@@ -87,9 +87,29 @@ app.use((req, res, next) => {
     next();
 });
 
+
+app.get("/", wrapAsync(async (req, res) => {
+    res.render("listings/index.ejs");
+}));
+
 app.get("/listings", wrapAsync(async (req, res) => {
-    let allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
+    let filter = {};
+    if (!req.user) {
+        return res.render("listings/listings.ejs", { allListings: [] });
+    }
+    if (req.user.role === "admin") {
+        filter = {};
+    }
+    else if (req.user.role === "client") {
+        filter.owner = req.user._id;
+    }
+    else if (req.user.role === "employee") {
+        filter.assignedTo = req.user._id;
+    }
+    let allListings = await Listing.find(filter)
+        .populate("owner")
+        .populate("assignedTo");
+    res.render("listings/listings.ejs", { allListings });
 }));
 
 app.get("/listings/new", isLoggedIn, (req, res) => {
@@ -137,7 +157,7 @@ app.put("/listings/:id", isLoggedIn, isOwner, upload.single("listing[image]"), w
 }));
 
 
-app.delete("/listings/:id", isLoggedIn, isOwner,  wrapAsync(async (req, res) => {
+app.delete("/listings/:id", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
     console.log(deletedListing);
@@ -160,7 +180,7 @@ app.post("/signup", wrapAsync(async (req, res) => {
             if (err) {
                 return next(err);
             }
-            res.redirect("/listings");
+            res.redirect("/");
         });
     } catch (err) {
         res.redirect("/signup");
@@ -175,7 +195,7 @@ app.post("/login", saveRedirectUrl, passport.authenticate("local", {
     failureRedirect: "/login", failureFlash: true
 }),
     async (req, res) => {
-        let redirectUrl = res.locals.redirectUrl || "/listings";
+        let redirectUrl = res.locals.redirectUrl || "/";
         res.redirect(redirectUrl);
     });
 
@@ -184,28 +204,210 @@ app.get("/logout", (req, res) => {
         if (err) {
             return next(err);
         }
-        res.redirect("/listings");
+        res.redirect("/");
     });
+});
+
+
+// profile route
+app.get("/profile", isLoggedIn, wrapAsync(async (req, res) => {
+    let user = await User.findById(req.user._id);
+    res.render("profile/profile.ejs", { user });
+}));
+
+app.get("/profile/edit", isLoggedIn, wrapAsync(async (req, res) => {
+    let user = await User.findById(req.user._id);
+    res.render("profile/edit.ejs", { user });
+}));
+
+app.put("/profile", isLoggedIn, wrapAsync(async (req, res) => {
+    const { firstName, lastName, username, email, phone } = req.body;
+
+    await User.findByIdAndUpdate(req.user._id, {
+        firstName,
+        lastName,
+        username,
+        email,
+        phone
+    });
+
+    req.flash("success", "Profile updated successfully");
+    res.redirect("/profile");
+}));
+
+app.get("/dashboard", isLoggedIn, (req, res) => {
+    const role = req.user.role;
+    if (role === "admin") {
+        return res.redirect("/dashboard/admin");
+    }
+    if (role === "employee") {
+        return res.redirect("/dashboard/employee");
+    }
+    res.redirect("/");
+});
+
+app.get("/dashboard/admin", isLoggedIn, isAdmin, wrapAsync(async (req, res) => {
+    const issues = await Listing.find({})
+        .populate("assignedTo")
+        .populate("owner");
+
+    const employees = await User.find({ role: "employee" });
+    res.render("dashboard/admin", { issues, employees });
+}));
+
+app.get("/dashboard/employee", isLoggedIn, isEmployee, wrapAsync(async (req, res) => {
+    const issues = await Listing.find({
+        assignedTo: req.user._id,
+    }).populate("owner");
+    res.render("dashboard/employee", { issues });
+}));
+
+
+app.put("/dashboard/admin/:id/assign", isLoggedIn, isAdmin, wrapAsync(async (req, res) => {
+    const { employeeId } = req.body;
+
+    await Listing.findByIdAndUpdate(req.params.id, {
+        assignedTo: employeeId,
+        status: "assigned",
+    });
+
+    req.flash("success", "Issue assigned");
+    res.redirect("/dashboard/admin");
+}));
+
+app.get("/dashboard/admin/:id/review", isAdmin, async (req, res) => {
+    const issue = await Listing.findById(req.params.id)
+        .populate("assignedTo");
+
+    res.render("dashboard/reviewWork.ejs", { issue });
+});
+
+app.put("/dashboard/admin/:id/approve", isAdmin, wrapAsync(async (req, res) => {
+    await Listing.findByIdAndUpdate(req.params.id, {
+        status: "resolved",
+        resolutionDetails: {
+            message: "Issue has been successfully resolved",
+            resolvedAt: new Date(),
+            approvedBy: req.user._id
+        }
+    });
+
+    req.flash("success", "Issue approved");
+    res.redirect("/dashboard/admin");
+}));
+
+app.put("/dashboard/admin/:id/reject", isAdmin, wrapAsync(async (req, res) => {
+    await Listing.findByIdAndUpdate(req.params.id, { status: "in-progress" });
+    req.flash("success", "Sent back to employee");
+    res.redirect("/dashboard/admin");
+}));
+
+
+// Employee routes to update issue status
+app.get("/dashboard/admin/newEmployee", isAdmin, (req, res) => {
+    res.render("dashboard/newEmployee.ejs");
+});
+
+app.get("/dashboard/admin/employees", isAdmin, wrapAsync(async (req, res) => {
+    const employees = await User.find({ role: "employee" });
+    res.render("dashboard/allEmployees.ejs", { employees });
+}));
+
+app.post("/dashboard/admin/employees", isAdmin, wrapAsync(async (req, res) => {
+    const { username, email, password, employeeId } = req.body;
+
+    const user = new User({ username, email, employeeId, role: "employee" });
+    await User.register(user, password);
+    console.log(user);
+    req.flash("success", "Employee created");
+    res.redirect("/dashboard/admin/employees");
+}));
+
+app.delete("/dashboard/admin/employees/:id", isAdmin, wrapAsync(async (req, res) => {
+    await User.findByIdAndDelete(req.params.id);
+    req.flash("success", "Employee deleted");
+    res.redirect("/dashboard/admin/employees");
+}));
+
+app.put("/dashboard/employee/:id", isEmployee, isLoggedIn, upload.single("resolvedImage"), async (req, res) => {
+
+    const { status } = req.body;
+
+    const listing = await Listing.findById(req.params.id);
+
+    // ❌ safety check (invalid flow)
+    if (!listing) {
+        req.flash("error", "Issue not found");
+        return res.redirect("/dashboard/employee");
+    }
+
+    // 🔒 allow only valid transitions
+    if (listing.status === "assigned" && status !== "in-progress") {
+        req.flash("error", "Invalid status change");
+        return res.redirect("/dashboard/employee");
+    }
+
+    if (listing.status === "in-progress" && status !== "pending-review") {
+        req.flash("error", "Invalid status change");
+        return res.redirect("/dashboard/employee");
+    }
+
+    // 🔥 image required only for pending-review
+    if (status === "pending-review" && !req.file) {
+        req.flash("error", "Image is required before sending for review!");
+        return res.redirect("/dashboard/employee");
+    }
+
+    let updateData = { status };
+
+    // save image if uploaded
+    if (req.file) {
+        updateData.resolvedImage = {
+            url: req.file.path,
+            filename: req.file.filename
+        };
+    }
+
+    await Listing.findByIdAndUpdate(req.params.id, updateData);
+
+    req.flash("success", "Status updated successfully");
+    res.redirect("/dashboard/employee");
 });
 
 
 // review routes
 app.post(
-  "/listings/:id/reviews", isLoggedIn,
-  wrapAsync(async (req, res) => {
-    console.log(req.user._id);
-    let { id } = req.params;
+    "/listings/:id/reviews", isLoggedIn,
+    wrapAsync(async (req, res) => {
+        console.log(req.user._id);
+        let { id } = req.params;
 
-    let listing = await Listing.findById(id);
-    let review = new Review(req.body.review);
-    review.author = req.user._id;
-    console.log(review);
-    listing.reviews.push(review);
-    await review.save();
-    await listing.save();
-    res.redirect(`/listings/${id}`);
-  }),
+        let listing = await Listing.findById(id);
+        let review = new Review(req.body.review);
+        review.author = req.user._id;
+        console.log(review);
+        listing.reviews.push(review);
+        await review.save();
+        await listing.save();
+        res.redirect(`/listings/${id}`);
+    }),
 );
+
+function isAdmin(req, res, next) {
+    if (!req.user || req.user.role !== "admin") {
+        req.flash("error", "Access Denied! Admin only.");
+        return res.redirect("/listings");
+    }
+    next();
+}
+
+function isEmployee(req, res, next) {
+    if (req.user.role !== "employee") {
+        return res.redirect("/dashboard");
+    }
+    next();
+}
+
 
 // Error Handling Middleware
 app.use((req, res, next) => {

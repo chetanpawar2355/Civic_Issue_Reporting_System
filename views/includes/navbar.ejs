@@ -1,25 +1,80 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand ms-5" href="/listings"><i class="fa-solid fa-recycle"></i></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link" href="/listings">Explore</a>
-            </div>
-        
-            <div class="navbar-nav ms-auto me-5">
-                <% if(!currentUser) { %>
-                    <a class="nav-link" href="/signup">Sign Up</a>
-                    <a class="nav-link" href="/login">Log In</a>
-                <% } %>
-                <% if(currentUser) { %>
-                    <a class="nav-link" href="/listings/new">Report Issue</a>
-                    <a class="nav-link" href="/logout">Log Out</a>
-                <% } %>
+<nav class="navbar custom-navbar px-4">
+    <div class="container-fluid d-flex align-items-center">
+
+        <!-- LEFT: Logo -->
+        <div class="nav-left d-flex align-items-center">
+
+            <div class="logo-icon">
+                <a href="/#home"><i class="fa-solid fa-location-dot"></i></a>
             </div>
 
+            <div class="logo-text ms-2">
+                <div class="brand-name">
+                    <a href="/#home">Sheher<span>Setu</span></a>
+                </div>
+                <div class="tagline">
+                    Report. Track. Resolve.
+                </div>
+            </div>
 
         </div>
+
+        <!-- RIGHT -->
+        <div class="nav-right d-flex align-items-center gap-3">
+
+            <% if(!currentUser) { %>
+                <a class="btn-signin" href="/login">Sign in</a>
+                <% } %>
+
+                    <% if(currentUser) { %>
+                        <div class="position-relative">
+
+                            <div class="profile-icon" id="profileIcon">
+                                <div class="avatar1">
+                                    <%= ( currentUser.firstName && currentUser.lastName ?
+                                        (currentUser.firstName.charAt(0) + currentUser.lastName.charAt(0)) :
+                                        currentUser.username.charAt(0) ).toUpperCase() %>
+                                </div>
+                            </div>
+
+                            <!-- SAME DROPDOWN -->
+                            <div id="profileMenu" class="profile-menu d-none">
+
+                                <div class="dropdown-user-info d-flex align-items-center gap-3 px-3 py-2 border-bottom">
+                                    <div class="profile-icon" id="profileIcon">
+                                        <div class="avatar2">
+                                            <%= ( currentUser.firstName && currentUser.lastName ?
+                                                (currentUser.firstName.charAt(0) + currentUser.lastName.charAt(0)) :
+                                                currentUser.username.charAt(0) ).toUpperCase() %>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="fw-semibold small">
+                                            <%= ( currentUser.firstName && currentUser.lastName ? (currentUser.firstName
+                                                + " " + currentUser.lastName) : currentUser.username ) %>
+                                        </div>
+                                        <div class="text-muted small" title="<%= currentUser.email %>">
+                                            <%= currentUser.email %>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <a href="/" class="dropdown-item">Home</a>
+                                <a href="/profile" class="dropdown-item">Profile</a>
+                                <% if(currentUser.role !=="client" ) { %>
+                                    <a href="/dashboard" class="dropdown-item">Dashboard</a>
+                                    <% } %>
+                                        <a href="/listings/new" class="dropdown-item">Report Issue</a>
+                                        <a href="/listings" class="dropdown-item">Track Complaints</a>
+                                        <a href="/logout" class="dropdown-item text-danger">Log Out</a>
+                            </div>
+
+                        </div>
+                        <% } %>
+
+        </div>
+
+    </div>
 </nav>

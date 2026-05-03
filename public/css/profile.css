@@ -1,0 +1,119 @@
+/* profile.ejs */
+
+.profile-card {
+    width: 360px;
+    border-radius: 16px;
+    margin-bottom: 50px;
+    background: #f8fbff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.08);
+}
+
+.profile-avatar {
+    width: 45px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar i {
+    font-size: 50px;
+    color: darkblue;
+}
+
+.profile-card p {
+    margin-bottom: 8px;
+    font-size: 15px;
+    color: #111827;
+}
+
+.profile-card strong {
+    color: #6b7280;
+}
+
+
+/* Edit Profile Card */
+.edit-profile-card {
+    width: 500px;
+    margin-bottom: 50px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.form-heading {
+    font-weight: 600;
+    color: #111827;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.custom-input {
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    transition: all 0.25s ease;
+    background-color: #f9fafb;
+}
+
+.custom-input:focus {
+    border-color: #FFC107;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
+}
+
+.small-hidden {
+    display: block;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.submit-btn {
+    background: #FFC107 !important;
+    color: #111 !important;
+    border-radius: 10px !important;
+    font-weight: 500 !important;
+    border: none !important;
+    transition: 0.3s !important;
+}
+
+.submit-btn:hover {
+    background: #e0a800 !important;
+    transform: translateY(-1px) !important;
+}
+
+.cancel-btn2 {
+    border: 1px solid #d1d5db !important;
+    border-radius: 10px !important;
+    color: #374151 !important;
+    background: #f9fafb !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.25s ease !important;
+}
+
+.cancel-btn2:hover {
+    background-color: #e5e7eb !important;
+    color: #111827 !important;
+    border-color: #9ca3af !important;
+    transform: translateY(-1px) !important;
+}
+
+.cancel-btn2:active {
+    transform: scale(0.97) !important;
+}
+
+.invalid-feedback {
+    color: #dc2626;
+    margin-top: 7.5px !important;
+}

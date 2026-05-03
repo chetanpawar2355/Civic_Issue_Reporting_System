@@ -16,6 +16,10 @@ const listingSchema = new Schema({
         url: String,
         filename: String
     },
+    resolvedImage: {
+      url: String,
+      filename: String,
+    },
     location: {
         type: String,
         required: [true, "Location is required"],
@@ -36,6 +40,14 @@ const listingSchema = new Schema({
             "resolved",
         ],
         default: "pending",
+    },
+    resolutionDetails: {
+        message: String,
+        resolvedAt: Date,
+        approvedBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
     },
     reviews: [
       {
