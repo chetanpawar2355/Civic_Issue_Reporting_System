@@ -17,3 +17,14 @@
       }, false)
     })
 })()
+
+document.addEventListener("click", function (e) {
+
+    document.querySelectorAll(".dropdown-menu2").forEach(menu => {
+        menu.classList.remove("show");
+    });
+
+    if (e.target.classList.contains("dropdown-toggle2")) {
+        e.target.nextElementSibling.classList.toggle("show");
+    }
+});

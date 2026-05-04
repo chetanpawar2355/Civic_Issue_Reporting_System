@@ -21,7 +21,7 @@ const { storage } = require("./cloudConfig");
 const upload = multer({ storage });
 const User = require("./models/users.js");
 const wrapAsync = require("./utils/wrapAsync.js");
-const { isLoggedIn, isOwner, saveRedirectUrl, isOwnerOrAdmin } = require("./middleware.js");
+const { isLoggedIn, isOwner, saveRedirectUrl, isOwnerOrAdmin, isReviewAuthor } = require("./middleware.js");
 
 
 app.set("view engine", "ejs");
@@ -387,6 +387,27 @@ app.post(
         await listing.save();
         res.redirect(`/listings/${id}`);
     }),
+);
+
+app.delete(
+    "/listings/:id/reviews/:reviewId",
+    isLoggedIn,
+    isReviewAuthor,
+    wrapAsync(async (req, res) => {
+
+        let { id, reviewId } = req.params;
+
+        // Remove reference from Listing
+        await Listing.findByIdAndUpdate(id, {
+            $pull: { reviews: reviewId }
+        });
+
+        // Delete actual review
+        await Review.findByIdAndDelete(reviewId);
+
+        req.flash("success", "Review Deleted!");
+        res.redirect(`/listings/${id}`);
+    })
 );
 
 function isAdmin(req, res, next) {

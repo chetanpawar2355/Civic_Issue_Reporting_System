@@ -41,20 +41,18 @@
                         <%= listing.state %>
                     </p>
 
-                    <% 
-    const isOwner = currentUser && listing.owner && listing.owner._id.equals(currentUser._id);
-    const isAdmin = currentUser && currentUser.role === "admin";
-%>
+                    <% const isOwner=currentUser && listing.owner && listing.owner._id.equals(currentUser._id); const
+                        isAdmin=currentUser && currentUser.role==="admin" ; %>
 
-<% if(isOwner || isAdmin) { %>
-    <div class="action-row">
-        <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
+                        <% if(isOwner || isAdmin) { %>
+                            <div class="action-row">
+                                <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
 
-        <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-            <button class="btn-delete">Delete</button>
-        </form>
-    </div>
-<% } %>
+                                <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+                                    <button class="btn-delete">Delete</button>
+                                </form>
+                            </div>
+                            <% } %>
             </div>
 
         </div>
@@ -89,9 +87,10 @@
                         <p class="muted">Details will appear after resolution.</p>
                         <% } %>
             </div>
-        </div><hr>
+        </div>
+        <hr>
 
-        <h4 class="section-heading">Comments</h4>  
+        <h4 class="section-heading">Comments</h4>
 
 
         <div class="card-box comment-box">
@@ -102,12 +101,39 @@
 
             <div class="review-list">
                 <% listing.reviews.forEach(r=> { %>
-                    <div class="review-item">
-                        <span class="review-user">@<%= r.author.username %></span>
-                        <p class="review-text">
-                            <%= r.comment %>
-                        </p>
+
+                    <div class="review-item d-flex justify-content-between align-items-start">
+
+                        <div>
+                            <span class="review-user">@<%= r.author.username %></span>
+                            <p class="review-text">
+                                <%= r.comment %>
+                            </p>
+                        </div>
+
+                        <% if(currentUser && r.author._id.equals(currentUser._id)) { %>
+
+                            <div class="dropdown2">
+                                <!-- 3 DOTS -->
+                                <i class="fa-solid fa-ellipsis-vertical dropdown-toggle2"></i>
+
+                                <!-- MENU -->
+                                <div class="dropdown-menu2">
+                                    <a href="#" class="dropdown-item2">Edit</a>
+
+                                    <form action="/listings/<%= listing._id %>/reviews/<%= r._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button class="dropdown-item2 text-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <% } %>
+
                     </div>
+
                     <% }) %>
             </div>
         </div>

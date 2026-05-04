@@ -207,27 +207,104 @@
 .review-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    max-height: 250px;
-    overflow-y: auto;
+    gap: 15px;
 }
 
 .review-item {
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px 15px;
 }
 
 .review-user {
-    font-weight: 600;
-    color: #3a86ff;
     font-size: 13px;
+    font-weight: 600;
+    color: #374151;
 }
 
 .review-text {
-    margin: 2px 0 0;
     font-size: 14px;
-    color: #444;
+    color: #4b5563;
+    margin-top: 4px;
 }
+
+.dropdown2 {
+    position: relative;
+}
+
+.dropdown-toggle2 {
+    font-size: 16px;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* hover */
+.dropdown-toggle2:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+/* menu */
+.dropdown-menu2 {
+    position: absolute;
+    top: 28px;
+    right: 0;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    min-width: 130px;
+    padding: 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+    display: none;
+    z-index: 100;
+}
+
+/* show class (JS se toggle hoga) */
+.dropdown-menu2.show {
+    display: block;
+}
+
+/* items */
+.dropdown-item2 {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #374151;
+    background: none;
+    border: none;
+    text-align: left;
+    transition: 0.2s;
+}
+
+/* hover */
+.dropdown-item2:hover {
+    background: #f3f4f6;
+}
+
+/* delete */
+.dropdown-item2.text-danger:hover {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .review-item {
+        padding: 10px 12px;
+    }
+
+    .review-text {
+        font-size: 13px;
+    }
+}
+
+
 
 .comment-input-bar {
     display: flex;

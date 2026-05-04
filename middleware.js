@@ -1,4 +1,5 @@
 const Listing = require("./models/listings.js");
+const Review = require("./models/reviews.js")
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -47,4 +48,30 @@ module.exports.isOwnerOrAdmin = async (req, res, next) => {
 
     req.flash("error", "You don't have permission");
     res.redirect(`/listings/${id}`);
+};
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+    let { id, reviewId } = req.params;
+
+    let review = await Review.findById(reviewId);
+
+    // ❗ Check review exist
+    if (!review) {
+        req.flash("error", "Review not found!");
+        return res.redirect(`/listings/${id}`);
+    }
+
+    // ❗ Check user logged in
+    if (!res.locals.currentUser) {
+        req.flash("error", "You must be logged in!");
+        return res.redirect("/login");
+    }
+
+    // ❗ Check author
+    if (!review.author.equals(res.locals.currentUser._id)) {
+        req.flash("error", "You are not authorized!");
+        return res.redirect(`/listings/${id}`);
+    }
+
+    next();
 };
