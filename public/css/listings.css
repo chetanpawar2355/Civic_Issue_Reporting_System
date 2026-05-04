@@ -241,12 +241,10 @@
     transition: 0.2s;
 }
 
-/* hover */
 .dropdown-toggle2:hover {
     background: rgba(0, 0, 0, 0.06);
 }
 
-/* menu */
 .dropdown-menu2 {
     position: absolute;
     top: 28px;
@@ -262,12 +260,10 @@
     z-index: 100;
 }
 
-/* show class (JS se toggle hoga) */
 .dropdown-menu2.show {
     display: block;
 }
 
-/* items */
 .dropdown-item2 {
     display: block;
     width: 100%;
@@ -282,12 +278,10 @@
     transition: 0.2s;
 }
 
-/* hover */
 .dropdown-item2:hover {
     background: #f3f4f6;
 }
 
-/* delete */
 .dropdown-item2.text-danger:hover {
     background: #fee2e2;
     color: #dc2626;
@@ -303,7 +297,6 @@
         font-size: 13px;
     }
 }
-
 
 
 .comment-input-bar {
