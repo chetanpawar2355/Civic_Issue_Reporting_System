@@ -392,7 +392,7 @@ html {
     height: 260px;
     max-width: 1100px;
     margin: 50px auto;
-    border-radius: 18px;
+    border-radius: 15px;
     overflow: hidden;
 
     /* background image */
@@ -412,15 +412,14 @@ html {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    /* bottom side */
     padding-bottom: 25px;
 }
 
 .cta-btn {
     background: #ffc107;
     color: #000;
-    padding: 12px 28px;
-    border-radius: 8px;
+    padding: 10px 20px;
+    border-radius: 7px;
     font-weight: 600;
     text-decoration: none;
     transition: 0.3s ease;
@@ -434,11 +433,14 @@ html {
 /* responsive */
 @media (max-width: 768px) {
     .cta-banner {
+        width: 90%;
+        max-width: none;
+        margin: 40px auto;
         height: 200px;
     }
 
     .cta-btn {
-        padding: 10px 22px;
+        padding: 10px 20px;
         font-size: 0.9rem;
     }
 }

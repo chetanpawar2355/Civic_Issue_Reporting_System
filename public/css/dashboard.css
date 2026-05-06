@@ -38,7 +38,7 @@ body {
 
 .action-buttons a {
   padding: 10px 20px;
-  border-radius: 30px;
+  border-radius: 10px;
   font-weight: 500;
   transition: 0.3s;
 }

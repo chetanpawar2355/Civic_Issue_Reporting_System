@@ -44,6 +44,7 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
+                        <th>No.</th>
                         <th>Title</th>
                         <th>Details</th>
                         <th>Status</th>
@@ -56,6 +57,9 @@
                     <% issues.forEach(issue=> { %>
 
                         <tr>
+                            <td>
+                                <%= issues.indexOf(issue) + 1 %>.
+                            </td>
                             <td>
                                 <%= issue.title %>
                             </td>
