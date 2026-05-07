@@ -52,26 +52,10 @@ module.exports.isOwnerOrAdmin = async (req, res, next) => {
 
 module.exports.isReviewAuthor = async (req, res, next) => {
     let { id, reviewId } = req.params;
-
     let review = await Review.findById(reviewId);
-
-    // ❗ Check review exist
-    if (!review) {
-        req.flash("error", "Review not found!");
-        return res.redirect(`/listings/${id}`);
-    }
-
-    // ❗ Check user logged in
-    if (!res.locals.currentUser) {
-        req.flash("error", "You must be logged in!");
-        return res.redirect("/login");
-    }
-
-    // ❗ Check author
     if (!review.author.equals(res.locals.currentUser._id)) {
-        req.flash("error", "You are not authorized!");
+        req.flash("error", "You are not the author of this review!");
         return res.redirect(`/listings/${id}`);
     }
-
     next();
 };
