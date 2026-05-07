@@ -14,8 +14,13 @@ router.route("/")
     .post(isLoggedIn, wrapAsync(reviewController.createReview));
 
 
+router.route("/:reviewId/edit")
+    .get(isLoggedIn, isReviewAuthor, wrapAsync(reviewController.renderEditReview));
+
+
 router.route("/:reviewId")
+    .put(isLoggedIn, isReviewAuthor, wrapAsync(reviewController.updateReview))
     .delete(isLoggedIn, isReviewAuthor, wrapAsync(reviewController.destroyReview));
 
-    
+
 module.exports = router;

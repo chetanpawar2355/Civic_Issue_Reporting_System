@@ -1,0 +1,35 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="edit-review-container">
+
+        <div class="edit-review-card">
+
+            <h2 class="edit-review-title">
+                Refine Your Review
+            </h2>
+
+            <p class="edit-review-subtitle">
+                Update your feedback here
+            </p>
+
+            <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=PUT" method="POST">
+
+                <textarea name="review[comment]" class="edit-review-textarea" required><%= review.comment %></textarea>
+
+                <div class="edit-review-actions">
+
+                    <button type="submit" class="update-btn">
+                        Update
+                    </button>
+
+                    <a href="/listings/<%= listing._id %>" class="cancel-btn">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>

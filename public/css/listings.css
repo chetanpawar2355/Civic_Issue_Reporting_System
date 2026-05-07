@@ -254,7 +254,7 @@
     border-radius: 10px;
     min-width: 130px;
     padding: 6px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 
     display: none;
     z-index: 100;
@@ -395,6 +395,115 @@
     }
 }
 
+
+/* review edit page */
+.edit-review-container {
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 0 18px;
+}
+
+.edit-review-card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ececec;
+}
+
+.edit-review-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.edit-review-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.edit-review-textarea {
+    width: 100%;
+    min-height: 220px;
+    border-radius: 16px;
+    border: 1px solid #d1d5db;
+    padding: 18px;
+    font-size: 16px;
+    resize: vertical;
+    outline: none;
+    transition: 0.3s ease;
+    background: #fafafa;
+}
+
+.edit-review-textarea:focus {
+    border-color: #fb8500;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(251, 133, 0, 0.15);
+}
+
+.edit-review-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.update-btn {
+    background: #FFC107;
+    border: none;
+    color: black;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: 600;
+}
+
+.update-btn:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background: #f1f1f1;
+    color: #222;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: #ddd;
+}
+
+
+@media (max-width: 768px) {
+
+    .edit-review-card {
+        padding: 20px;
+    }
+
+    .edit-review-title {
+        font-size: 1.5rem;
+    }
+
+    .edit-review-textarea {
+        min-height: 180px;
+    }
+
+    .edit-review-actions {
+        flex-direction: column;
+    }
+
+    .update-btn,
+    .cancel-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
 
 
 /* ------------------------------------------------------------------ */

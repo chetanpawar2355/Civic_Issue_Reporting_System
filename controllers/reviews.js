@@ -16,15 +16,29 @@ module.exports.createReview = async (req, res) => {
     res.redirect(`/listings/${id}`);
 }
 
+module.exports.renderEditReview = async (req, res) => {
+    let { id, reviewId } = req.params;
+    let listing = await Listing.findById(id);
+    let review = await Review.findById(reviewId);
+    res.render("listings/editReview.ejs", { listing, review });
+}
+
+module.exports.updateReview = async (req, res) => {
+        let { reviewId, id } = req.params;
+        await Review.findByIdAndUpdate(reviewId, {
+            comment: req.body.review.comment
+        });
+        res.redirect(`/listings/${id}`);
+    }
+
 module.exports.destroyReview = async (req, res) => {
     let { id, reviewId } = req.params;
     await Listing.findByIdAndUpdate(id, {
         $pull: {
-            reviews: new mongoose.Types.ObjectId(reviewId)
+            reviews: reviewId
         }
     });
     let deletedReview = await Review.findByIdAndDelete(reviewId);
     console.log(deletedReview);
-    req.flash("success", "Review Deleted!");
     res.redirect(`/listings/${id}`);
 }
