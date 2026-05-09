@@ -1,5 +1,11 @@
 /* sign-in and sign-up page styling */
 
+.invalid-feedback {
+    color: #dc2626;
+    margin-top: -10px !important;
+    margin-bottom: 10px !important;
+}
+
 .login-page {
     min-height: 100vh;
     width: 100%;
@@ -68,12 +74,6 @@
 /* RIGHT SIDE */
 .darkBlueColor{
     color: darkblue;
-}
-
-.invalid-feedback {
-    color: #dc2626;
-    margin-top: -10px !important;
-    margin-bottom: 10px !important;
 }
 
 .login-right {
