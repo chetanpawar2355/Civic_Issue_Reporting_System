@@ -9,16 +9,12 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
-const Listing = require("./models/listings");
-const Review = require("./models/reviews.js");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const multer = require("multer");
-const { storage } = require("./cloudConfig");
-const upload = multer({ storage });
+const compression = require("compression");
 const User = require("./models/users.js");
 const wrapAsync = require("./utils/wrapAsync.js");
 const reviewRouter = require("./routes/reviews.js");
@@ -26,15 +22,18 @@ const listingRouter = require("./routes/listings.js");
 const userRouter = require("./routes/users.js");
 const profileRouter = require("./routes/profile.js");
 const dashboardRouter = require("./routes/dashboard.js");
-const { isLoggedIn, isOwner, saveRedirectUrl, isOwnerOrAdmin, isReviewAuthor } = require("./middleware.js");
 
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(compression());
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "public"), {
+    maxAge: "7d",
+    etag: true
+}));
 app.engine("ejs", ejsMate);
 
 
@@ -74,7 +73,8 @@ const sessionOptions = {
     cookie: {
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7,
-        httpOnly: true
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production"
     }
 }
 
@@ -115,10 +115,10 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render("error.ejs", { message });
 });
 
-if (process.env.NODE_ENV !== "production") {
-    app.listen(8080, () => {
-        console.log('Server is running on port 8080');
-    });
-}
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
 
 module.exports = app;
