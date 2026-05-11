@@ -23,4 +23,21 @@ router.route("/logout")
     .get(userController.logout);
 
 
+router.get("/auth/google",
+    passport.authenticate("google", {
+        scope: ["profile", "email"],
+        prompt: "select_account"
+    })
+);
+
+router.get("/auth/google/callback",
+    passport.authenticate("google", {
+        failureRedirect: "/login"
+    }),
+    (req, res) => {
+        res.redirect("/");
+    }
+);
+
+
 module.exports = router;

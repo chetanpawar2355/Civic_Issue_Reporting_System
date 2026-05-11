@@ -26,7 +26,7 @@
     justify-content: center;
     text-decoration: none;
     font-size: 18px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     transition: 0.3s ease;
     z-index: 1000;
 }
@@ -60,7 +60,8 @@
 }
 
 .login-left h1 {
-    font-size: 40px;;
+    font-size: 40px;
+    ;
     margin-bottom: 20px;
     line-height: 1.2;
 }
@@ -72,7 +73,7 @@
 }
 
 /* RIGHT SIDE */
-.darkBlueColor{
+.darkBlueColor {
     color: darkblue;
 }
 
@@ -92,7 +93,7 @@
     border-radius: 15px;
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .login-box h2 {
@@ -160,6 +161,54 @@
     transform: translateY(-2px);
 }
 
+/* GOOGLE SIGN IN BUTTON */
+
+.email-button1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 14px;
+    padding: 12px 16px;
+
+    background: #fff;
+    color: #111827;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: all 0.3s ease;
+}
+
+.email-button1::before {
+    content: "";
+
+    width: 20px;
+    height: 20px;
+
+    background-image: url("https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    flex-shrink: 0;
+}
+
+.email-button1:hover {
+    background-color: #f8fafc;
+    border-color: #9ca3af;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 /* SIGNUP  */
 .signup-text {
     text-align: center;
@@ -178,7 +227,7 @@
 }
 
 
-.login-box > p {
+.login-box>p {
     font-size: 12px;
     color: #6b7280;
     margin-top: 15px;

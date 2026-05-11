@@ -15,8 +15,6 @@ const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
 const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
 const compression = require("compression");
 const User = require("./models/users.js");
 const wrapAsync = require("./utils/wrapAsync.js");
@@ -25,6 +23,7 @@ const listingRouter = require("./routes/listings.js");
 const userRouter = require("./routes/users.js");
 const profileRouter = require("./routes/profile.js");
 const dashboardRouter = require("./routes/dashboard.js");
+const passport = require("./config/passport");
 
 
 app.set("view engine", "ejs");
@@ -72,12 +71,13 @@ const sessionOptions = {
     store,
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7,
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production"
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax"
     }
 }
 
@@ -86,9 +86,7 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
 
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
