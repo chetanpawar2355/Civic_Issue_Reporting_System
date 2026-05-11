@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "24.0.1"
+    "node": "24"
   },
   "name": "civic-issue-reporting-system",
   "version": "1.0.0",
