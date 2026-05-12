@@ -32,10 +32,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression());
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "public"), {
-    maxAge: "7d",
-    etag: true
-}));
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "public"), {
+        maxAge: "7d",
+        etag: true
+    }));
+} else {
+    app.use(express.static(path.join(__dirname, "public"), {
+        etag: false,
+        lastModified: false,
+        setHeaders: (res) => {
+            res.set("Cache-Control", "no-store");
+        }
+    }));
+}
 app.engine("ejs", ejsMate);
 
 
