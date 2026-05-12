@@ -228,20 +228,20 @@ body {
     text-decoration: underline;
 }
 
-.login-box > p {
+.login-box>p {
     margin-top: 18px;
     font-size: 12px;
     line-height: 1.6;
     color: #6b7280;
 }
 
-.login-box > p a {
+.login-box>p a {
     color: #111827;
     text-decoration: none;
     font-weight: 600;
 }
 
-.login-box > p a:hover {
+.login-box>p a:hover {
     text-decoration: underline;
 }
 
@@ -344,6 +344,8 @@ body {
         width: 100%;
         min-height: 100vh;
         padding: 18px 14px;
+        padding-top: 75px;
+        align-items: flex-start;
     }
 
     .login-box {
@@ -360,7 +362,7 @@ body {
         font-size: 13px;
     }
 
-    .login-box > p {
+    .login-box>p {
         font-size: 11px;
     }
 
