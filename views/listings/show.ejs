@@ -46,10 +46,10 @@
 
                         <% if(isOwner || isAdmin) { %>
                             <div class="action-row">
-                                <a href="/listings/<%= listing._id %>/edit" class="btn-edit">Edit</a>
+                                <a href="/listings/<%= listing._id %>/edit" class="btn-edit">EDIT</a>
 
                                 <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                                    <button class="btn-delete">Delete</button>
+                                    <button class="btn-delete">DELETE</button>
                                 </form>
                             </div>
                             <% } %>

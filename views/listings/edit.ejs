@@ -15,37 +15,37 @@
                   novalidate
                   enctype="multipart/form-data">
 
-                <label class="form-label">Title</label>
+                <label class="form-label">TITLE</label>
                 <input name="listing[title]" id="title" required type="text"
                     class="form-control"
                     value="<%= listing.title %>">
 
                 <div class="invalid-feedback">Enter title</div>
 
-                <label class="form-label">Description</label>
+                <label class="form-label">DESCRIPTION</label>
                 <textarea name="listing[description]" id="description" required
                     class="form-control"><%= listing.description %></textarea>
 
                 <div class="invalid-feedback">Enter description</div>
 
-                <label class="form-label">Upload New Image</label>
+                <label class="form-label">UPLOAD NEW IMAGE</label>
                 <input name="listing[image]" id="image" type="file" class="form-control">
 
-                <label class="form-label">Location</label>
+                <label class="form-label">LOCATION</label>
                 <input name="listing[location]" id="location" required type="text"
                     class="form-control"
                     value="<%= listing.location %>">
 
                 <div class="invalid-feedback">Enter location</div>
 
-                <label class="form-label">State</label>
+                <label class="form-label">STATE</label>
                 <input name="listing[state]" id="state" required type="text"
                     class="form-control"
                     value="<%= listing.state %>">
 
                 <div class="invalid-feedback">Enter state</div>
 
-                <button class="submit-btn">Update Issue</button>
+                <button class="submit-btn">UPDATE ISSUE</button>
 
             </form>
 

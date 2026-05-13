@@ -1,4 +1,4 @@
-/* show Page */
+/* show Page and review edit page */
 
 .main-title {
     margin: 30px 0 20px;
@@ -318,6 +318,7 @@
     }
 }
 
+/* ----------------------------------------------------------- */
 
 /* review edit page */
 .edit-review-container {

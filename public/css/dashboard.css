@@ -60,7 +60,7 @@ body {
 
 .btn-outline-primary2:hover {
   background: #3a86ff !important;
-  color: #fff !important; 
+  color: #fff !important;
 }
 
 
@@ -84,6 +84,12 @@ body {
 
 .table tbody tr:hover {
   background: #f1f5f9;
+}
+
+.table th:last-child,
+.table td:last-child {
+  width: 1%;
+  white-space: nowrap;
 }
 
 .status {
@@ -258,7 +264,7 @@ body {
   gap: 6px;
 }
 
-.viewDetails{
+.viewDetails {
   text-decoration: none;
   color: #fb8500;
 }
@@ -338,14 +344,8 @@ body {
     font-size: 20px;
   }
 
-  /* MOBILE USER CARD CLICK STYLE */
-  .user-card {
-    top: 35px;
-    display: none;
-  }
-
-  .assigned-user:active .user-card {
-    display: block;
+  .assigned-user span {
+    padding-bottom: 10px;
   }
 }
 

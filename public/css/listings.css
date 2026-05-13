@@ -1,5 +1,7 @@
-/* new.ejs, edit.ejs, show.ejs and listings.ejs */
+/* new.ejs, edit.ejs and listings.ejs */
 
+
+/* edit.ejs */
 .form-page {
     min-height: 100vh;
     background: #f9fafb;
@@ -45,6 +47,11 @@
     font-weight: 500;
 }
 
+.form-label{
+    color: black !important;
+    font-size: 13.5px !important;
+}
+
 .form-box input,
 .form-box textarea {
     padding: 10px;
@@ -63,8 +70,8 @@
 /* validation */
 .invalid-feedback {
     color: #dc2626;
-    margin-top: -10px !important;
-    margin-bottom: 15px !important;
+    margin-top: -8px;
+    margin-bottom: 15px;
 }
 
 .submit-btn {
