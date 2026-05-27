@@ -23,6 +23,7 @@ const listingRouter = require("./routes/listings.js");
 const userRouter = require("./routes/users.js");
 const profileRouter = require("./routes/profile.js");
 const dashboardRouter = require("./routes/dashboard.js");
+const { globalLimiter } = require("./rateLimiter.js");
 const passport = require("./config/passport");
 
 
@@ -30,6 +31,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(globalLimiter);
 app.use(compression());
 app.use(methodOverride("_method"));
 if (process.env.NODE_ENV === "production") {

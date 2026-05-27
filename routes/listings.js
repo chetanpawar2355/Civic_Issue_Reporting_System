@@ -8,11 +8,14 @@ const { storage } = require("../cloudConfig");
 const upload = multer({ storage });
 const { isLoggedIn, isOwner, isOwnerOrAdmin } = require("../middleware.js");
 const listingController = require("../controllers/listings.js");
+const {
+    createIssueLimiter
+} = require("../rateLimiter");
 
 
 router.route("/")
     .get(wrapAsync(listingController.index))
-    .post(isLoggedIn, upload.single("listing[image]"), wrapAsync(listingController.createListing));
+    .post(isLoggedIn, createIssueLimiter, upload.single("listing[image]"), wrapAsync(listingController.createListing));
 
 
 router.route("/new")

@@ -214,7 +214,7 @@ html {
 }
 
 .feature-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-7.5px);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
@@ -241,6 +241,7 @@ html {
 .steps-section h2 {
     font-size: 2.2rem;
     font-weight: 700;
+    color: #111827;
 }
 
 .steps-container {
@@ -333,6 +334,7 @@ html {
 .stats-section h2 {
     font-size: 2.2rem;
     font-weight: 700;
+    color: #111827;
 }
 
 .stat-card {
@@ -395,6 +397,57 @@ html {
     .stat-card {
         width: 100%;
         max-width: 260px;
+    }
+}
+
+/* -------------------------------------------------------------------- */
+
+.meaning-section {
+    text-align: center;
+    padding: 50px 20px;
+    background: #fff;
+}
+
+.meaning-section h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 20px;
+}
+
+.meaning-section span {
+    color: #ffb703;
+    font-weight: 700;
+}
+
+.meaning-section p {
+    font-size: 18px;
+    color: #555;
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+.quote {
+    margin-top: 20px;
+    font-style: italic;
+    color: #1d3557;
+}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px) {
+
+    .meaning-section {
+        padding: 60px 18px;
+    }
+
+    .meaning-section h2 {
+        font-size: 30px;
+    }
+
+    .meaning-section p {
+        font-size: 16px;
+        line-height: 1.7;
     }
 }
 

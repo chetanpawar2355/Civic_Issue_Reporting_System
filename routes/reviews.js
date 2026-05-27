@@ -9,9 +9,13 @@ const mongoose = require("mongoose");
 
 const { isLoggedIn, isReviewAuthor } = require("../middleware.js");
 const reviewController = require("../controllers/reviews.js");
+const {
+    reviewLimiter
+} = require("../rateLimiter");
+
 
 router.route("/")
-    .post(isLoggedIn, wrapAsync(reviewController.createReview));
+    .post(isLoggedIn, reviewLimiter, wrapAsync(reviewController.createReview));
 
 
 router.route("/:reviewId/edit")
