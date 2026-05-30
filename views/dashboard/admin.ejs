@@ -182,25 +182,8 @@
 
                         <% if(issue.assignedTo){ %>
 
-                            <span>@<%= issue.assignedTo.username %></span>
+                            <span>Assigned To: <i>@<%= issue.assignedTo.username %></i></span>
 
-                            <div class="user-card">
-                                <h5>
-                                    <%= issue.assignedTo.firstName %>
-                                        <%= issue.assignedTo.lastName %>
-                                </h5>
-                                <p><b>Username:</b> @<%= issue.assignedTo.username %>
-                                </p>
-                                <p><b>ID:</b>
-                                    <%= issue.assignedTo.employeeId %>
-                                </p>
-                                <p><b>Email:</b>
-                                    <%= issue.assignedTo.email %>
-                                </p>
-                                <p><b>Phone:</b>
-                                    <%= issue.assignedTo.phone %>
-                                </p>
-                            </div>
 
                             <% } else { %>
 
