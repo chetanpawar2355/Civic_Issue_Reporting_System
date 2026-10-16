@@ -1,4 +1,4 @@
-# SheherSetu – Civic Issue Reporting System
+# 🏙️ SheherSetu – Civic Issue Reporting System
 
 **SheherSetu** is a full-stack web application designed to bridge the gap between citizens and local authorities by making civic issue reporting, tracking, and resolution more transparent and efficient.
 
@@ -118,26 +118,18 @@ Open the local URL configured by your application in your browser.
 
 ## 📸 Screenshots
 
-Add screenshots of your actual application here to demonstrate its interface and functionality.
-
-Suggested screenshots:
-
 - Home page
+  <img width="1886" height="850" alt="image" src="https://github.com/user-attachments/assets/5c784de7-91e1-44b7-8f1c-a929ab1eeb00" />
+
 - User dashboard
+  <img width="1892" height="673" alt="image" src="https://github.com/user-attachments/assets/1590fd8c-b7c5-4c7b-a0d5-983ce6ab076c" />
+
 - Report issue page
+  <img width="1891" height="860" alt="image" src="https://github.com/user-attachments/assets/2b867b4b-1aa4-4377-9119-92fce6427db8" />
+
 - Issue details and status tracking
 - Employee dashboard
 - Admin dashboard
-
-Example Markdown syntax:
-
-```markdown
-![Home Page](screenshots/home.png)
-![Report Issue](screenshots/report-issue.png)
-![Admin Dashboard](screenshots/admin-dashboard.png)
-```
-
-Create a `screenshots` folder in your repository and add the corresponding images before using these links.
 
 ## 🚀 Future Enhancements
 
