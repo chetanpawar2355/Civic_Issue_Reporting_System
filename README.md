@@ -118,18 +118,31 @@ Open the local URL configured by your application in your browser.
 
 ## 📸 Screenshots
 
-- Home page
-  <img width="1886" height="850" alt="image" src="https://github.com/user-attachments/assets/5c784de7-91e1-44b7-8f1c-a929ab1eeb00" />
+**1. Home page:**
 
-- User dashboard
-  <img width="1892" height="673" alt="image" src="https://github.com/user-attachments/assets/1590fd8c-b7c5-4c7b-a0d5-983ce6ab076c" />
+<img width="1886" height="850" alt="image" src="https://github.com/user-attachments/assets/5c784de7-91e1-44b7-8f1c-a929ab1eeb00" />
 
-- Report issue page
-  <img width="1891" height="860" alt="image" src="https://github.com/user-attachments/assets/2b867b4b-1aa4-4377-9119-92fce6427db8" />
+**2. User dashboard:**
 
-- Issue details and status tracking
-- Employee dashboard
-- Admin dashboard
+<img width="1892" height="673" alt="image" src="https://github.com/user-attachments/assets/1590fd8c-b7c5-4c7b-a0d5-983ce6ab076c" />
+
+**3. Report issue page:**
+
+<img width="1891" height="860" alt="image" src="https://github.com/user-attachments/assets/2b867b4b-1aa4-4377-9119-92fce6427db8" />
+
+**4. Issue details and status tracking:**
+
+<img width="1895" height="822" alt="image" src="https://github.com/user-attachments/assets/7d65befc-3184-459b-b846-cc786ccbd6b0" />
+<img width="1893" height="666" alt="image" src="https://github.com/user-attachments/assets/9f72414a-1696-40ff-995d-890fabdd1adf" />
+<img width="1892" height="857" alt="image" src="https://github.com/user-attachments/assets/c5cb3360-ece9-428a-ba75-3b2f8f6ea3cb" />
+
+**5. Employee dashboard:**
+
+<img width="1890" height="857" alt="image" src="https://github.com/user-attachments/assets/386fd30f-2f00-4e78-ab12-9482e76996e3" />
+
+**6. Admin dashboard:**
+
+<img width="1890" height="852" alt="image" src="https://github.com/user-attachments/assets/69d90eb6-4190-47f2-a6a2-578e40e1bf14" />
 
 ## 🚀 Future Enhancements
 
