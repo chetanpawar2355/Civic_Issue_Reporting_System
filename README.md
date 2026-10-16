@@ -121,6 +121,8 @@ Open the local URL configured by your application in your browser.
 **1. Home page:**
 
 <img width="1886" height="850" alt="image" src="https://github.com/user-attachments/assets/5c784de7-91e1-44b7-8f1c-a929ab1eeb00" />
+<img width="1895" height="830" alt="image" src="https://github.com/user-attachments/assets/8fa8fde3-fbe9-492b-97a0-c971350111ca" />
+<img width="1887" height="760" alt="image" src="https://github.com/user-attachments/assets/23600c62-de3e-4dba-8471-3dc0aa76a9c1" />
 
 **2. User dashboard:**
 
